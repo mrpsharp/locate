@@ -16,6 +16,9 @@ function showPosition(position) {
     document.getElementById("osmaps-link").innerHTML = "Open location in OsMaps";
     document.getElementById("osmaps-link").setAttribute('href', osLink);
     document.getElementById("latlong").innerHTML = `${latLng.lat}, ${latLng.lng}`;
+    var shareLink = document.getElementById("share-link")
+    shareLink.innerHTML = "Share location";
+    shareLink.addEventListener("click", shareLocation)
 }
 
 function showError(error) {
@@ -40,4 +43,32 @@ function convertToOSGridRef(latLng) {
     const eaNo = os.Transform.fromLatLng(latLng);
     const gridRef = os.Transform.toGridRef(eaNo);
     return gridRef.text;
+}
+
+function shareLocation() {
+    const shareText = `My grid reference is ${document.getElementById("grid-reference").innerHTML}
+View location online: ${document.getElementById("osmaps-link").getAttribute("href")}`;
+    if(navigator.share) {
+        try {
+            navigator.share({text: shareText});
+        } catch (error) {
+            alternateShare(shareText);
+        }
+    } else {
+        alternateShare(shareText);
+    }
+}
+
+function alternateShare(shareText) {
+    const copyButtonLabel = "Copy message";
+    messageBlock = document.getElementById("alt-share");
+    messageBlock.innerHTML = shareText;
+    if (navigator.clipboard) {
+        let button = document.createElement("button");
+        button.innerText = copyButtonLabel;
+        messageBlock.appendChild(button);
+        button.addEventListener("click", async () => {
+            await navigator.clipboard.writeText(shareText);
+        });
+    }
 }
