@@ -1,4 +1,9 @@
-# Locate
-A webapp to locate a user using the UK OS grid. Inspired by [What3Words Locate](https://locate.what3words.com).
+# MyGridRef.uk
 
-Makes use of [OS Transform](https://github.com/OrdnanceSurvey/os-transform).
+[MyGridRef.uk](https://mygridref.uk) is a simple webapp which uses your phone GPS to find your six number UK grid reference and give you the option to share it. I created this in response to the withdrawal of OS Locate which created a gap in the market for a simple way to find your grid reference. I was also inspired by [What3Words Locate](https://locate.what3words.com), a similar application for What3Words.
+
+The project is hosted on [Github](https://github.com/mrpsharp/mygridref.uk). If you find problems please let me know through [Github Issues](https://github.com/mrpsharp/mygridref.uk/issues) or [get in touch](https://petersharp.education/contact/).
+
+This project makes use of [OS Transform](https://github.com/OrdnanceSurvey/os-transform) and [ProJ4JS](http://proj4js.org).
+
+If you find it useful please <a href="https://buymeacoffee.com/petersharp" target="_blank">Buy me a coffee <img src="bmc-logo-no-background.png" alt="Icon" width="24" height="24"></a>
