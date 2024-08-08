@@ -22,7 +22,10 @@ function showPosition(position) {
     infoMessage(gridRefHTML);
     document.getElementById("result-links").style.display = 'block';
     document.getElementById("osmaps-link").setAttribute('href', osLink);
-    // document.getElementById("latlong").innerHTML = `${latLng.lat}, ${latLng.lng}`;
+    const params = new URLSearchParams(window.location.search);
+    if (params.has("testing")) {
+        document.getElementById("osmaps-link").style.display = 'block';
+    }
     var shareLink = document.getElementById("share-link")
     shareLink.addEventListener("click", () => shareLocation(osGridRef, accuracyStr));
 }
