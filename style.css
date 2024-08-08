@@ -114,3 +114,13 @@ body {
 #osmaps-link {
   display: none;
 }
+
+.footer {
+  margin: 15px 20px;
+  font-size: 0.8rem;
+  color: #7b7b7b;
+}
+
+.footer a {
+  color: #7b7b7b;
+}
