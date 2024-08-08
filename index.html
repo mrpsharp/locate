@@ -3,16 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OS Grid Reference Finder</title>
+    <title>Grid reference finder (UK)</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>Your OS Grid Reference</h1>
-    <p id="grid-reference">Waiting for location...</p>
-    <!-- <p id="latlong"></p> -->
-    <p><a id="osmaps-link" href="" target="_blank"></a></p>
-    <p><a id="share-link" href="#"></a></p>
-    <pre id="alt-share"></pre>
+    <div class="container">
+        <h1>Grid reference finder (UK)</h1>
+        <div id="experimental" class="caution">
+            <p>Caution, this is currently experimental!</p>
+        </div>
+        <button id="error-btn">
+            Error. Click here to refresh.
+        </button>
+        <div id='info-div' class="info">
+            <p id="info-message">Loading...</p>
+        </div>
+        <div id="result-links" class="result-links">
+            <p><a class="link-button" id="osmaps-link" href="#" target="_blank">Open location in OS Maps</a></p>
+            <p><a class="link-button" id="share-link" href="#">Share location</a></p>
+        </div>
+        <div id="alt-share-div" class="caution">
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.0/proj4.js"></script>
     <script src="os-transform.js"></script>
     <script src="script.js"></script>
@@ -20,6 +32,5 @@
       window.onload = getLocation;
     </script>
 
-    <h1>Caution, this is currently experimental!</h1>
   </body>
 </html>
