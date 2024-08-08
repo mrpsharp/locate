@@ -17,7 +17,7 @@ function showPosition(position) {
         hideErrorButton();
     }
     const osGridRef = convertToOSGridRef(latLng);
-    const gridRefHTML = `Based on an accuracy of ${accuracyStr}m, your grid reference is <strong>${osGridRef}</strong>`
+    const gridRefHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>Based on an accuracy of ${accuracyStr}m`
     const osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
     infoMessage(gridRefHTML);
     document.getElementById("result-links").style.display = 'block';
@@ -42,9 +42,7 @@ function convertToOSGridRef(latLng) {
 }
 
 function shareLocation(osGridRef, accuracyStr) {
-    const shareText = `My location is currently ${osGridRef}, with an accuracy of ${accuracyStr}.
-
-View location online: ${document.getElementById("osmaps-link").getAttribute("href")}`;
+    const shareText = `My location is currently ${osGridRef}, with an accuracy of ${accuracyStr}m. View location online: ${document.getElementById("osmaps-link").getAttribute("href")}`;
     if(navigator.share) {
         try {
             navigator.share({text: shareText});
