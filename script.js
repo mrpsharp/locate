@@ -1,21 +1,23 @@
 function getLocation() {
-
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showError);
     } else {
         document.getElementById("grid-reference").innerHTML = "Geolocation is not supported by this browser.";
     }
-    console.log("location found")
 }
 
 function showPosition(position) {
     const latLng = { lat: position.coords.latitude, lng: position.coords.longitude};
+    const accuracy = position.coords.accuracy;
+    const accuracyStr = accuracy.toLocaleString(undefined, {maximumFractionDigits: 0});
     const osGridRef = convertToOSGridRef(latLng);
+    const gridRefText = `Based on an accuracy of ${accuracyStr}m, your grid reference is ${osGridRef}`
     const osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
-    document.getElementById("grid-reference").innerHTML = osGridRef;
+    document.getElementById("grid-reference").innerHTML = gridRefText;
+    console.log(accuracy);
     document.getElementById("osmaps-link").innerHTML = "Open location in OsMaps";
     document.getElementById("osmaps-link").setAttribute('href', osLink);
-    document.getElementById("latlong").innerHTML = `${latLng.lat}, ${latLng.lng}`;
+    // document.getElementById("latlong").innerHTML = `${latLng.lat}, ${latLng.lng}`;
     var shareLink = document.getElementById("share-link")
     shareLink.innerHTML = "Share location";
     shareLink.addEventListener("click", shareLocation)
@@ -46,7 +48,8 @@ function convertToOSGridRef(latLng) {
 }
 
 function shareLocation() {
-    const shareText = `My grid reference is ${document.getElementById("grid-reference").innerHTML}
+    const shareText = `${document.getElementById("grid-reference").innerHTML}
+    
 View location online: ${document.getElementById("osmaps-link").getAttribute("href")}`;
     if(navigator.share) {
         try {
