@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>OS Grid Reference Finder</title>
     <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
+  </head>
+  <body>
     <h1>Your OS Grid Reference</h1>
     <p id="grid-reference">Waiting for location...</p>
     <!-- <p id="latlong"></p> -->
@@ -17,8 +16,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.0/proj4.js"></script>
     <script src="os-transform.js"></script>
     <script src="script.js"></script>
-    <script>window.onload=getLocation</script>
+    <script>
+      window.onload = getLocation;
+    </script>
 
     <h1>Caution, this is currently experimental!</h1>
-</body>
+  </body>
 </html>
