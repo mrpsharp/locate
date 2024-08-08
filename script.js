@@ -33,7 +33,8 @@ function convertToOSGridRef(latLng) {
     if (inBounds.valid) {
         const eaNo = os.Transform.fromLatLng(latLng);
         const gridRef = os.Transform.toGridRef(eaNo);
-        return gridRef.text;
+        // return gridRef.text;
+        return `${gridRef.letters} ${gridRef.eastings.substring(0,3)}${gridRef.northings.substring(0,3)}`;
     } else {
         showErrorButton(inBounds.message);
         return undefined;
