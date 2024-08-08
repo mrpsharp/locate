@@ -9,10 +9,14 @@
 
     <h1>Your OS Grid Reference</h1>
     <p id="grid-reference">Waiting for location...</p>
-    <button onclick="getLocation()">Get OS Grid Reference</button>
+    <p id="latlong"></p>
+    <p><a id="osmaps-link" href="" target="_blank"></a></p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.7.0/proj4.js"></script>
     <script src="os-transform.js"></script>
     <script src="script.js"></script>
+    <script>window.onload=getLocation</script>
+
+    <h1>Caution, this is currently experimental!</h1>
 </body>
 </html>

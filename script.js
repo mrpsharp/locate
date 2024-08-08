@@ -11,7 +11,11 @@ function getLocation() {
 function showPosition(position) {
     const latLng = { lat: position.coords.latitude, lng: position.coords.longitude};
     const osGridRef = convertToOSGridRef(latLng);
+    const osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
     document.getElementById("grid-reference").innerHTML = osGridRef;
+    document.getElementById("osmaps-link").innerHTML = "Open location in OsMaps";
+    document.getElementById("osmaps-link").setAttribute('href', osLink);
+    document.getElementById("latlong").innerHTML = `${latLng.lat}, ${latLng.lng}`;
 }
 
 function showError(error) {
