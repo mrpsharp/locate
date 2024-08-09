@@ -63,6 +63,13 @@ module.exports = function(grunt) {
                     }
                 ]
             }
+        },
+
+        // Shell commands to deploy to GitHub Pages
+        shell: {
+            deploy: {
+                command: 'git subtree push --prefix dist origin gh-pages'
+            }
         }
     });
 
@@ -75,4 +82,6 @@ module.exports = function(grunt) {
 
     // Default task(s).
     grunt.registerTask('default', ['clean', 'uglify', 'cssmin', 'htmlmin', 'copy']);
+    // Deploy task
+    grunt.registerTask('deploy', ['default', 'shell:deploy']);
 };
