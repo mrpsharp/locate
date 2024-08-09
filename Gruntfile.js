@@ -56,6 +56,7 @@ module.exports = function(grunt) {
                             '!package-lock.json',
                             '!style.css',
                             '!script.js',
+                            '!os-transform.js',
                             '!index.html',
                             '!readme.html',
                             '!dist/**',
