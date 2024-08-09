@@ -58,7 +58,8 @@ module.exports = function(grunt) {
                             '!script.js',
                             '!index.html',
                             '!readme.html',
-                            '!dist/**'
+                            '!dist/**',
+                            '!node_modules/**'
                         ],
                         dest: 'dist/'
                     }
