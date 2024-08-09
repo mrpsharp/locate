@@ -1,0 +1,78 @@
+module.exports = function(grunt) {
+
+    // Project configuration.
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
+        // Clean the dist directory
+        clean: {
+            dist: ['dist']
+        },
+
+        // Minify JavaScript files
+        uglify: {
+            dist: {
+                files: {
+                    'script.min.js': ['script.js']
+                }
+            }
+        },
+
+        // Minify CSS files
+        cssmin: {
+            dist: {
+                files: {
+                    'style.min.css': ['style.css']
+                }
+            }
+        },
+
+        // Minify HTML files
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+                },
+                files: {
+                    'dist/index.html': 'index.html',
+                    'dist/readme.html': 'readme.html'
+                }
+            }
+        },
+
+        // Copy all other files to the dist directory
+        copy: {
+            dist: {
+                files: [
+                    // Copy all files except HTML, CSS, JS, and excluded files
+                    {
+                        expand: true,
+                        src: [
+                            '**',
+                            '!Gruntfile.js',
+                            '!package.json',
+                            '!package-lock.json',
+                            '!style.css',
+                            '!script.js',
+                            '!index.html',
+                            '!readme.html',
+                            '!dist/**'
+                        ],
+                        dest: 'dist/'
+                    }
+                ]
+            }
+        }
+    });
+
+    // Load the plugins
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
+    // Default task(s).
+    grunt.registerTask('default', ['clean', 'uglify', 'cssmin', 'htmlmin', 'copy']);
+};

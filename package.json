@@ -1,0 +1,26 @@
+{
+  "name": "mygridref.uk",
+  "version": "1.0.0",
+  "description": "Find and share your UK grid reference using just your phone.",
+  "scripts": {
+    "build": "grunt"
+  },
+  "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-contrib-clean": "^2.0.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-uglify": "^5.0.1",
+    "grunt-contrib-cssmin": "^4.0.0",
+    "grunt-contrib-htmlmin": "^3.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrpsharp/mygridref.uk.git"
+  },
+  "author": "Peter Sharp",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrpsharp/mygridref.uk/issues"
+  },
+  "homepage": "https://github.com/mrpsharp/mygridref.uk#readme"
+}
