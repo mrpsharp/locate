@@ -79,6 +79,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-shell');
+
 
     // Default task(s).
     grunt.registerTask('default', ['clean', 'uglify', 'cssmin', 'htmlmin', 'copy']);
