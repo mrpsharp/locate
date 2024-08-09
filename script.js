@@ -17,9 +17,14 @@ function showPosition(position) {
         hideErrorButton();
     }
     const osGridRef = convertToOSGridRef(latLng);
-    const gridRefHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>Based on an accuracy of ${accuracyStr}m`
-    const osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
-    infoMessage(gridRefHTML);
+    var osLink;
+    if (osGridRef) {
+        infoHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>Based on an accuracy of ${accuracyStr}m`;
+        osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
+    } else {
+        infoHTML = 'Error finding your grid reference. You may have success with <a href="https://locate.what3words.com">What3Words Locate</a> instead';
+    }
+    infoMessage(infoHTML);
     document.getElementById("result-links").style.display = 'block';
     document.getElementById("osmaps-link").setAttribute('href', osLink);
     const params = new URLSearchParams(window.location.search);
@@ -46,7 +51,8 @@ function convertToOSGridRef(latLng) {
 }
 
 function shareLocation(osGridRef, accuracyStr) {
-    const shareText = `My location is currently ${osGridRef}, with an accuracy of ${accuracyStr}m. View location online: ${document.getElementById("osmaps-link").getAttribute("href")}`;
+    d = new Date();
+    const shareText = `At ${d.toLocaleTimeString()} on ${d.toLocaleDateString()} my location was ${osGridRef}, with an accuracy of ${accuracyStr}m. View location online: ${document.getElementById("osmaps-link").getAttribute("href")}`;
     if(navigator.share) {
         try {
             navigator.share({text: shareText});
