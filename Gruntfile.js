@@ -13,7 +13,8 @@ module.exports = function(grunt) {
         uglify: {
             dist: {
                 files: {
-                    'script.min.js': ['script.js']
+                    'script.min.js': ['script.js'],
+                    'os-transform.min.js': ['os-transform.js']
                 }
             }
         },
