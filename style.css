@@ -1,3 +1,6 @@
+// Supports weights 300-800
+import '@fontsource-variable/open-sans';
+
 html {
   font-size: 16px;
 }
@@ -30,7 +33,7 @@ html {
 
 /* Body Styling */
 body {
-  font-family: 'Open Sans', 'Arial', sans-serif;
+  font-family: 'Open Sans Variable', 'Arial', sans-serif;
   line-height: 1.6;
   background-color: #f4f4f4;
   color: #333;

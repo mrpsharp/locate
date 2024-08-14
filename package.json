@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/mrpsharp/mygridref.uk/issues"
   },
-  "homepage": "https://github.com/mrpsharp/mygridref.uk#readme"
+  "homepage": "https://github.com/mrpsharp/mygridref.uk#readme",
+  "dependencies": {
+    "@fontsource-variable/open-sans": "^5.0.29"
+  }
 }

@@ -1,10 +1,13 @@
-const CACHE_NAME = 'mygridref-cache-v0.1';
+const CACHE_NAME = 'mygridref-cache-v0.2';
 const urlsToCache = [
+  '/',
   '/index.html',
   '/style.min.css',
   '/sw.min.js',
-  'script.min.js',
-  '/icon.png'
+  '/script.min.js',
+  '/os-transform.min.js',
+  '/icon.png',
+  '/proj4.js'
 ];
 
 // Install service worker
@@ -19,13 +22,27 @@ self.addEventListener('install', event => {
 
 //  Fetching Assets
 self.addEventListener('fetch', event => {
-event.respondWith(
-    caches.match(event.request)
-    .then(response => {
-        return response || fetch(event.request);
+  console.log('Fetching:', event.request.url); // Log the URL of the request
+
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      if (response) {
+        console.log('Found in cache:', event.request.url); // Log if the response is found in the cache
+        return response;
+      }
+
+      console.log('Not found in cache, fetching from network:', event.request.url); // Log if the response is not in the cache
+      return fetch(event.request).then(networkResponse => {
+        // Optionally, cache the new response here
+        return networkResponse;
+      }).catch(error => {
+        console.error('Fetching failed:', event.request.url, error); // Log any errors during the network request
+        throw error; // Re-throw the error to ensure it propagates
+      });
     })
-);
+  );
 });
+
 
 // Clean up old caches
 self.addEventListener('activate', event => {
