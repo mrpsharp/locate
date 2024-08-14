@@ -14,7 +14,8 @@ module.exports = function(grunt) {
             dist: {
                 files: {
                     'script.min.js': ['script.js'],
-                    'os-transform.min.js': ['os-transform.js']
+                    'os-transform.min.js': ['os-transform.js'],
+                    'sw.min.js': ['sw.js']
                 }
             }
         },

@@ -1,3 +1,13 @@
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.min.js').then(function(registration) {
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }, function(err) {
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
 function getLocation() {
   infoMessage("Finding location...");
   if (navigator.geolocation) {
@@ -25,7 +35,6 @@ function showPosition(position) {
   const osGridRef = convertToOSGridRef(latLng);
   var osLink;
   if (osGridRef) {
-    console.log("test");
     infoHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>Based on an accuracy of ${accuracyStr}m`;
     infoMessage(infoHTML);
     osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;

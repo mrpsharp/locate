@@ -1,6 +1,7 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "MyGridRef.UK",
+    "short_name": "MyGridRef.UK",
+    "start_url": "/index.html",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

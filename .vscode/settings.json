@@ -2,4 +2,5 @@
     "liveServer.settings.CustomBrowser": "chrome",
     "editor.wordWrap": "on",
     "liveServer.settings.root": "/dist",
+    "liveServer.settings.ignoreFiles":["**"],
 }
