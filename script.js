@@ -35,7 +35,9 @@ function showPosition(position) {
   const osGridRef = convertToOSGridRef(latLng);
   var osLink;
   if (osGridRef) {
-    infoHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>Based on an accuracy of ${accuracyStr}m`;
+    d = new Date();
+    measurementStr = `Measured at ${d.toLocaleTimeString()} on ${d.toLocaleDateString()} with an accuracy of ${accuracyStr}m`;
+    infoHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>${measurementStr}`;
     infoMessage(infoHTML);
     osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
     document.getElementById("result-links").style.display = "block";
@@ -46,7 +48,11 @@ function showPosition(position) {
     }
     var shareLink = document.getElementById("share-link");
     shareLink.addEventListener("click", () =>
-      shareLocation(osGridRef, accuracyStr)
+      shareLocation(osGridRef, measurementStr)
+    );
+    var refreshLink = document.getElementById("refresh-link");
+    refreshLink.addEventListener("click", () =>
+      getLocation()
     );
   }
 }
@@ -71,9 +77,9 @@ function convertToOSGridRef(latLng) {
   }
 }
 
-function shareLocation(osGridRef, accuracyStr) {
+function shareLocation(osGridRef, measurementStr) {
   d = new Date();
-  const shareText = `At ${d.toLocaleTimeString()} on ${d.toLocaleDateString()} my location was ${osGridRef}, with an accuracy of ${accuracyStr}m. View location online: ${document
+  const shareText = `My location is ${osGridRef}. (${measurementStr}). View location online: ${document
     .getElementById("osmaps-link")
     .getAttribute("href")}`;
   if (navigator.share) {
@@ -88,15 +94,21 @@ function shareLocation(osGridRef, accuracyStr) {
 }
 
 function alternateShare(shareText) {
-  const copyButtonLabel = "Copy message";
-  altShareDiv = document.getElementById("alt-share-div");
-  altShareDiv.style.display = "block";
-  const heading = document.createElement("h4");
-  heading.textContent = "Error sharing, copy text below";
-  const p = document.createElement("p");
-  p.textContent = shareText;
-  altShareDiv.appendChild(heading);
-  altShareDiv.appendChild(p);
+  var p = document.getElementById("share-text");
+  if (p) {
+    p.textContent = shareText;
+  } else {
+    altShareDiv = document.getElementById("alt-share-div");
+    altShareDiv.style.display = "block";
+    const heading = document.createElement("h4");
+    heading.textContent = "Error sharing, copy text below";
+    p = document.createElement("p");
+    p.id = "share-text"
+    p.textContent = shareText;
+    altShareDiv.appendChild(heading);
+    altShareDiv.appendChild(p);
+  }
+  
 }
 
 function showError(error) {
@@ -123,6 +135,7 @@ function showErrorButton(errorText) {
   'Error finding your grid reference. You may have success with <a href="https://locate.what3words.com">What3Words Locate</a> instead';
   infoMessage(infoHTML);
   errorButton.addEventListener("click", getLocation);
+  document.getElementById("result-links").style.display = "None";
 }
 
 function hideErrorButton() {
