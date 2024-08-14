@@ -73,6 +73,14 @@ module.exports = function(grunt) {
             deploy: {
                 command: 'git subtree push --prefix dist origin gh-pages'
             }
+        },
+
+        // Watch task
+        watch: {
+            dist: {
+                files: ['*.html', '*.js', '*.css'],
+                tasks: ['default']
+            }
         }
     });
 
@@ -83,6 +91,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 
     // Default task(s).
