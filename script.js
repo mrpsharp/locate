@@ -1,3 +1,5 @@
+var watchID;
+
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
     navigator.serviceWorker.register('/sw.min.js').then(function(registration) {
@@ -8,15 +10,15 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-function getLocation() {
-  infoMessage("Finding location...");
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    document.getElementById("info-div").innerHTML =
-      "Geolocation is not supported by this browser.";
-  }
-}
+// function getLocation() {
+//   infoMessage("Finding location...");
+//   if (navigator.geolocation) {
+//     navigator.geolocation.getCurrentPosition(showPosition, showError);
+//   } else {
+//     document.getElementById("info-div").innerHTML =
+//       "Geolocation is not supported by this browser.";
+//   }
+// }
 
 function showPosition(position) {
   const latLng = {
@@ -35,7 +37,7 @@ function showPosition(position) {
   const osGridRef = convertToOSGridRef(latLng);
   var osLink;
   if (osGridRef) {
-    d = new Date();
+    d = new Date(position.timestamp);
     measurementStr = `Measured at ${d.toLocaleTimeString()} on ${d.toLocaleDateString()} with an accuracy of ${accuracyStr}m`;
     infoHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>${measurementStr}`;
     infoMessage(infoHTML);
@@ -50,10 +52,13 @@ function showPosition(position) {
     shareLink.addEventListener("click", () =>
       shareLocation(osGridRef, measurementStr)
     );
-    var refreshLink = document.getElementById("refresh-link");
-    refreshLink.addEventListener("click", () =>
-      getLocation()
-    );
+    if (!watchID) {
+      var refreshLink = document.getElementById("refresh-link");
+      refreshLink.style.display = "block";
+      refreshLink.addEventListener("click", () =>
+        getLocation()
+      );
+    }
   }
 }
 
@@ -145,3 +150,28 @@ function hideErrorButton() {
 function infoMessage(HTML) {
   document.getElementById("info-message").innerHTML = HTML;
 }
+
+function getLocation() {
+  if (watchID) {
+    navigator.geolocation.clearWatch(watchID);
+    console.log("Watch cleared");
+  }
+  infoMessage("Finding location...");
+  if ("geolocation" in navigator) {
+    const options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+    if ("watchPosition" in navigator.geolocation) {
+      watchID = navigator.geolocation.watchPosition(showPosition, showError, options);
+      console.log("location watching");
+    } else {
+      // Fallback to getCurrentPosition
+      navigator.geolocation.getCurrentPosition(showPosition, showError, options);
+      console.log("ono watch");
+    }
+  } else {
+    infoMessage("Geolocation is not supported by this browser.");
+  }
+};

@@ -1,6 +1,3 @@
-// Supports weights 300-800
-import '@fontsource-variable/open-sans';
-
 html {
   font-size: 16px;
 }
@@ -139,6 +136,10 @@ body {
 }
 
 #osmaps-link {
+  display: none;
+}
+
+#refresh-link {
   display: none;
 }
 
