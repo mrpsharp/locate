@@ -92,6 +92,7 @@ body {
   font-size: 1.4em;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 #error-btn {
@@ -160,4 +161,25 @@ body {
 
 p {
   margin: 15px 0px;
+}
+
+.light {
+  width: 20px;   /* Adjust size as needed */
+  height: 20px;  /* Adjust size as needed */
+  border-radius: 50%;
+  background-color: red; /* Initial color */
+  position: absolute;
+  top: 10px;  /* 10px from the top of the wrapper */
+  right: 10px; /* 10px from the right of the wrapper */
+  transition: background-color 0.3s ease;
+}
+
+/* Green light */
+.green {
+  background-color: green;
+}
+
+/* Red light */
+.red {
+  background-color: red;
 }

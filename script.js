@@ -10,16 +10,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// function getLocation() {
-//   infoMessage("Finding location...");
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition(showPosition, showError);
-//   } else {
-//     document.getElementById("info-div").innerHTML =
-//       "Geolocation is not supported by this browser.";
-//   }
-// }
-
 function showPosition(position) {
   const latLng = {
     lat: position.coords.latitude,
@@ -147,6 +137,27 @@ function hideErrorButton() {
   document.getElementById("error-btn").style.display = "None";
 }
 
+function toggleLight(state) {
+  var light = document.getElementById("light");
+  // If a state is provided ("on" or "off")
+  if (state === "on" || state === 1) {
+      light.classList.remove("red");
+      light.classList.add("green");
+  } else if (state === "off" || state === 0) {
+      light.classList.remove("green");
+      light.classList.add("red");
+  } else {
+      // No state provided, toggle the current state
+      if (light.classList.contains("red")) {
+          light.classList.remove("red");
+          light.classList.add("green");
+      } else {
+          light.classList.remove("green");
+          light.classList.add("red");
+      }
+  }
+}
+
 function infoMessage(HTML) {
   document.getElementById("info-message").innerHTML = HTML;
 }
@@ -155,6 +166,7 @@ function getLocation() {
   if (watchID) {
     navigator.geolocation.clearWatch(watchID);
     console.log("Watch cleared");
+    toggleLight("off");
   }
   infoMessage("Finding location...");
   if ("geolocation" in navigator) {
@@ -166,10 +178,11 @@ function getLocation() {
     if ("watchPosition" in navigator.geolocation) {
       watchID = navigator.geolocation.watchPosition(showPosition, showError, options);
       console.log("location watching");
+      toggleLight("on");
     } else {
       // Fallback to getCurrentPosition
       navigator.geolocation.getCurrentPosition(showPosition, showError, options);
-      console.log("ono watch");
+      toggleLight("off");
     }
   } else {
     infoMessage("Geolocation is not supported by this browser.");

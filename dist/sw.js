@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mygridref-cache-v0.3.3';
+const CACHE_NAME = 'mygridref-cache-v0.4';
 const urlsToCache = [
   '/',
   '/index.html',
