@@ -8,7 +8,7 @@ const urlsToCache = [
   '/os-transform.min.js',
   '/icon-sml.png',
   '/proj4.js',
-  'manifest.json',
+  '/manifest.json',
 ];
 
 // Install service worker
