@@ -24,12 +24,15 @@ function showPosition(position) {
   } else {
     hideErrorButton();
   }
-  const osGridRef = convertToOSGridRef(latLng);
+  const gridRef = convertToOSGridRef(latLng);
+  console.log(gridRef);
   var osLink;
-  if (osGridRef) {
-    d = new Date(position.timestamp);
+  if (gridRef) {
+    console.log(String(Math.round(Number(gridRef.eastings)/100)));
+    var gridRefShort = gridRef.letters + " " + String(Math.round(Number(gridRef.eastings)/100)) + " " + String(Math.round(Number(gridRef.northings)/100));
+    var d = new Date(position.timestamp);
     measurementStr = `Measured at ${d.toLocaleTimeString()} on ${d.toLocaleDateString()} with an accuracy of ${accuracyStr}m`;
-    infoHTML = `<p>Your grid reference is</p><p class="gridref">${osGridRef}</p><p>${measurementStr}`;
+    infoHTML = `<p>Your grid reference is</p><p class="gridref">${gridRefShort}</p><p>${measurementStr}`;
     infoMessage(infoHTML);
     osLink = `https://explore.osmaps.com/pin?lat=${latLng.lat}&lon=${latLng.lng}&zoom=16`;
     document.getElementById("result-links").style.display = "block";
@@ -40,7 +43,7 @@ function showPosition(position) {
     }
     var shareLink = document.getElementById("share-link");
     shareLink.addEventListener("click", () =>
-      shareLocation(osGridRef, measurementStr)
+      shareLocation(gridRef, measurementStr)
     );
     if (!watchID) {
       var refreshLink = document.getElementById("refresh-link");
@@ -61,19 +64,16 @@ function convertToOSGridRef(latLng) {
   if (inBounds.valid) {
     const eaNo = os.Transform.fromLatLng(latLng);
     const gridRef = os.Transform.toGridRef(eaNo);
-    // return gridRef.text;
-    return `${gridRef.letters} ${gridRef.eastings.substring(
-      0,
-      3
-    )}${gridRef.northings.substring(0, 3)}`;
+    var eastNum = Number(gridRef.eastings)/100;
+    return gridRef;
   } else {
     showErrorButton(inBounds.message);
     return undefined;
   }
 }
 
-function shareLocation(osGridRef, measurementStr) {
-  const shareText = `My location is ${osGridRef}. (${measurementStr}). View location online: ${document
+function shareLocation(gridRef, measurementStr) {
+  const shareText = `My location is ${gridRef.text}. (${measurementStr}). View location online: ${document
     .getElementById("osmaps-link")
     .getAttribute("href")}`;
   if (navigator.share) {
