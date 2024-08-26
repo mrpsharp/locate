@@ -89,20 +89,27 @@ function shareLocation(gridRef, measurementStr) {
 
 function alternateShare(shareText) {
   var p = document.getElementById("share-text");
-  if (p) {
-    p.textContent = shareText;
-  } else {
-    altShareDiv = document.getElementById("alt-share-div");
-    altShareDiv.style.display = "block";
-    const heading = document.createElement("h4");
-    heading.textContent = "Error sharing, copy text below";
-    p = document.createElement("p");
-    p.id = "share-text"
-    p.textContent = shareText;
-    altShareDiv.appendChild(heading);
-    altShareDiv.appendChild(p);
+  var modal = document.getElementById("altShare");
+  var shareHeader = document.getElementById("shareHeader");
+  modal.style.display = "block";
+  p.textContent = shareText;
+  var closeBtn = document.getElementById("modalClose");
+  // Listen for close click
+  closeBtn.onclick = function () {
+    modal.style.display = "none";
   }
-  
+
+  // // Listen for outside click
+  // window.onclick = function (event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
+  navigator.clipboard.writeText(shareText).then(function() {
+    shareHeader.textContent = "Error sharing, text copied to clipboard";
+  }).catch(function(error) {
+    console.log("Failed to copy text");
+  });
 }
 
 function showError(error) {
