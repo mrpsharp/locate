@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mygridref-cache-v0.4';
+const CACHE_NAME = 'mygridref-cache-v0.5';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -9,7 +9,6 @@ const urlsToCache = [
   '/icon-sml.png',
   '/proj4.js',
   'manifest.json',
-  'bmc-logo-no-background.png'
 ];
 
 // Install service worker
