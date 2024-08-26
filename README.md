@@ -1,5 +1,8 @@
 # MyGridRef.uk
 
+> [!CAUTION[
+> Caution, this is currently experimental and not fully tested. Double-check any grid reference provided!
+
 [MyGridRef.uk](https://mygridref.uk) is a simple webapp which uses your phone GPS to find your six number UK grid reference and give you the option to share it. I created this in response to the withdrawal of OS Locate which created a gap in the market for a simple way to find your grid reference. I was also inspired by [What3Words Locate](https://locate.what3words.com), a similar application for What3Words.
 
 If you want to check the gridreference is sensible, you can use the [testing](https://mygridref.uk/?testing) link which gives you an option to open your reported location in OS maps. Double-check the grid reference on the web page matched the one you have on the web app.
