@@ -73,7 +73,6 @@ function convertToOSGridRef(latLng) {
 }
 
 function shareLocation(osGridRef, measurementStr) {
-  d = new Date();
   const shareText = `My location is ${osGridRef}. (${measurementStr}). View location online: ${document
     .getElementById("osmaps-link")
     .getAttribute("href")}`;
