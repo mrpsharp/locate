@@ -28,8 +28,7 @@ function showPosition(position) {
   console.log(gridRef);
   var osLink;
   if (gridRef) {
-    console.log(String(Math.round(Number(gridRef.eastings)/100)));
-    var gridRefShort = gridRef.letters + " " + String(Math.round(Number(gridRef.eastings)/100)) + " " + String(Math.round(Number(gridRef.northings)/100));
+    var gridRefShort = gridRef.letters + " " + String(Math.round(Number(gridRef.eastings)/100)).padStart(3,"0") + " " + String(Math.round(Number(gridRef.northings)/100)).padStart(3,"0");
     var d = new Date(position.timestamp);
     measurementStr = `Measured at ${d.toLocaleTimeString()} on ${d.toLocaleDateString()} with an accuracy of ${accuracyStr}m`;
     infoHTML = `<p>Your grid reference is</p><p class="gridref">${gridRefShort}</p><p>${measurementStr}`;
