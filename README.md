@@ -11,6 +11,6 @@ The project is hosted on [Github](https://github.com/mrpsharp/mygridref.uk). If 
 
 ## Acknowledgements 
 
-This project makes use of [OS Transform](https://github.com/OrdnanceSurvey/os-transform) and [ProJ4JS](http://proj4js.org).
+This project makes use of [OS Transform](https://github.com/OrdnanceSurvey/os-transform) and [ProJ4JS](http://proj4js.org). Contains public sector information licensed under the Open Government Licence v3.0.
 
 If you find it useful please <a href="https://buymeacoffee.com/petersharp" target="_blank">Buy me a coffee <img src="bmc-logo-no-background.png" alt="Icon" width="24" height="24"></a>
