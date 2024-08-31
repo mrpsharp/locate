@@ -37,8 +37,7 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
                 },
                 files: {
-                    'dist/index.html': 'index.html',
-                    'dist/readme.html': 'readme.html'
+                    'dist/index.html': 'index.html'
                 }
             }
         },
